@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Crear Nueva Asignación</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-title {
+            color: #007bff;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.9;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content" class="container mt-5">
+    <div class="form-container">
+        <h1 class="form-title">Crear Nueva Asignación</h1>
+        <form th:action="@{/asignaciones/save}" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="docente"><i class="fas fa-chalkboard-teacher"></i> Docente</label>
+                        <select id="docente" name="docenteId" class="form-control" required>
+                            <option th:each="docente : ${docentes}" th:value="${docente.id}" th:text="|${docente.nombre} ${docente.apellido}|"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="grupo"><i class="fas fa-users"></i> Grupo</label>
+                        <select id="grupo" name="grupoId" class="form-control" required>
+                            <option th:each="grupo : ${grupos}" th:value="${grupo.id}" th:text="${grupo.nombre}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="anio"><i class="fas fa-calendar-year"></i> Año</label>
+                        <input type="text" class="form-control" id="anio" name="anio" placeholder="Escriba el año" required/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ciclo"><i class="fas fa-calendar"></i> Ciclo</label>
+                        <input type="text" class="form-control" id="ciclo" name="ciclo" placeholder="Escriba el ciclo" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                    <div class="btn-container">
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-save"></i> Guardar</button>
+                        <a th:href="@{/asignaciones}" class="btn btn-secondary btn-block"><i class="fas fa-arrow-left"></i> Regresar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Editar Docente</title>
+    <style>
+        body {
+            background-color: #f5f7fa;
+        }
+        .edit-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 100%;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            width: 100%;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .mt-3 {
+            margin-top: 1rem;
+        }
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content" class="container">
+    <div class="edit-container">
+        <h1>Editar Docente</h1>
+        <form th:action="@{/docentes/save}" th:object="${docente}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="Escriba el nombre del docente" required/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" class="form-control" th:field="*{apellido}" id="apellido" placeholder="Escriba el apellido del docente" required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Escriba el email del docente" required/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" class="form-control" th:field="*{telefono}" id="telefono" placeholder="Escriba el teléfono del docente" required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="escuela">Escuela</label>
+                        <input type="text" class="form-control" th:field="*{escuela}" id="escuela" placeholder="Escriba la escuela del docente" required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Modificar</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <a th:href="@{/docentes}" class="btn btn-secondary">Regresar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Detalles de la Asignación</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .details-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .details-title {
+            color: #007bff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .details-dl dt {
+            font-weight: bold;
+            color: #343a40;
+        }
+        .details-dl dd {
+            color: #6c757d;
+        }
+        .btn-custom {
+            margin-right: 10px;
+            border-width: 2px;
+        }
+        .btn-custom:hover {
+            opacity: 0.9;
+        }
+        .btn-outline-info {
+            border-color: #17a2b8;
+            color: #17a2b8;
+        }
+        .btn-outline-info:hover {
+            background-color: #17a2b8;
+            color: #ffffff;
+        }
+        .btn-secondary {
+            border-color: #6c757d;
+            color: #fff;
+        }
+        .btn-secondary:hover {
+            background-color: #6c757d;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="container details-container">
+        <h1 class="details-title">Detalles de la Asignación</h1>
+        <hr />
+        <dl class="row details-dl">
+            <dt class="col-sm-3">ID</dt>
+            <dd class="col-sm-9" th:text="${docenteGrupo.id}"></dd>
+
+            <dt class="col-sm-3">Docente</dt>
+            <dd class="col-sm-9" th:text="|${docenteGrupo.docente.nombre} ${docenteGrupo.docente.apellido}|"></dd>
+
+            <dt class="col-sm-3">Grupo</dt>
+            <dd class="col-sm-9" th:text="${docenteGrupo.grupo.nombre}"></dd>
+
+            <dt class="col-sm-3">Año</dt>
+            <dd class="col-sm-9" th:text="${docenteGrupo.anio}"></dd>
+
+            <dt class="col-sm-3">Ciclo</dt>
+            <dd class="col-sm-9" th:text="${docenteGrupo.ciclo}"></dd>
+        </dl>
+        <div class="d-flex justify-content-center mt-4">
+            <a th:href="@{/asignaciones/edit/{id}(id=${docenteGrupo.id})}" class="btn btn-outline-info btn-custom">Editar</a>
+            <a th:href="@{/asignaciones}" class="btn btn-secondary btn-custom">Regresar</a>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

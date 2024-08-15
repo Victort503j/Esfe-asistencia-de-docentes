@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Listado de Asignaciones</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-outline-primary {
+            margin-bottom: 20px;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .table tbody td {
+            vertical-align: middle;
+        }
+        .pagination {
+            justify-content: center;
+        }
+        .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #ffffff;
+        }
+        .page-link {
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content" class="container">
+    <!-- Mostrar mensaje de éxito si está disponible -->
+    <div th:if="${msg != null}">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: "Confirmación",
+                text: '[[${msg}]]',
+                icon: "success"
+            });
+        </script>
+    </div>
+
+    <!-- Mostrar mensaje de error si está disponible -->
+    <div th:if="${error != null}">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: "Error",
+                text: '[[${error}]]',
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <h1>Listado de asignaciones Docente-Grupo</h1>
+
+    <a th:href="@{/asignaciones/create}" class="btn btn-outline-primary">Nueva asignación</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Año</th>
+            <th>Ciclo</th>
+            <th>Docente</th>
+            <th>Escuela</th>
+            <th>Grupo</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${asignaciones}">
+            <td th:text="${item.anio}"></td>
+            <td th:text="${item.ciclo}"></td>
+            <td th:text="|${item.docente.nombre} ${item.docente.apellido}|"></td>
+            <td th:text="${item.docente.escuela}"></td>
+            <td th:text="${item.grupo.nombre}"></td>
+            <td>
+                <a th:href="@{/asignaciones/details/{id}(id=${item.id})}" class="btn btn-outline-secondary">Detalles</a>
+                <a th:href="@{/asignaciones/edit/{id}(id=${item.id})}" class="btn btn-outline-info">Editar</a>
+                <a th:href="@{/asignaciones/remove/{id}(id=${item.id})}" class="btn btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <div class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item" th:each="pagenumber : ${pageNumbers}">
+                    <a class="page-link" th:href="@{/asignaciones(page=${pagenumber})}" th:text="${pagenumber}"></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

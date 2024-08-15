@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Eliminar Asignación</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .delete-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        h1 {
+            color: #dc3545;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #495057;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        dt {
+            font-weight: bold;
+            color: #343a40;
+        }
+        dd {
+            color: #6c757d;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-danger:hover, .btn-secondary:hover {
+            opacity: 0.9;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Espacio entre los botones */
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content" class="container">
+    <div class="delete-container">
+        <h1>Eliminar Asignación</h1>
+        <h3>¿Estás seguro que deseas eliminar el registro seleccionado?</h3>
+        <div>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9" th:text="${docenteGrupo.id}"></dd>
+
+                <dt class="col-sm-3">Docente</dt>
+                <dd class="col-sm-9" th:text="|${docenteGrupo.docente.nombre} ${docenteGrupo.docente.apellido}|"></dd>
+
+                <dt class="col-sm-3">Grupo</dt>
+                <dd class="col-sm-9" th:text="${docenteGrupo.grupo.nombre}"></dd>
+
+                <dt class="col-sm-3">Año</dt>
+                <dd class="col-sm-9" th:text="${docenteGrupo.anio}"></dd>
+
+                <dt class="col-sm-3">Ciclo</dt>
+                <dd class="col-sm-9" th:text="${docenteGrupo.ciclo}"></dd>
+            </dl>
+
+            <form th:action="@{/asignaciones/delete}" method="post">
+                <input type="hidden" name="id" th:value="${docenteGrupo.id}">
+                <div class="btn-container">
+                    <input type="submit" value="Eliminar" class="btn btn-danger">
+                    <a th:href="@{/asignaciones}" class="btn btn-secondary">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

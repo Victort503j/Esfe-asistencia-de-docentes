@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Listado de Docentes</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-outline-primary {
+            margin-bottom: 20px;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .table tbody td {
+            vertical-align: middle;
+        }
+        .pagination {
+            justify-content: center;
+        }
+        .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #ffffff;
+        }
+        .page-link {
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content" class="container">
+    <!-- Show success message if available -->
+    <div th:if="${msg != null}">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: "Confirmación",
+                text: '[[${msg}]]',
+                icon: "success"
+            });
+        </script>
+    </div>
+
+    <!-- Show error message if available -->
+    <div th:if="${error != null}">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: "Error",
+                text: '[[${error}]]',
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <h1>Listado de Docentes</h1>
+
+    <a th:href="@{/docentes/create}" class="btn btn-outline-primary">Nuevo Docente</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Escuela</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${docentes}">
+            <td th:text="${item.nombre}"></td>
+            <td th:text="${item.apellido}"></td>
+            <td th:text="${item.email}"></td>
+            <td th:text="${item.telefono}"></td>
+            <td th:text="${item.escuela}"></td>
+            <td>
+                <a th:href="@{/docentes/details/{id}(id=${item.id})}" class="btn btn-outline-secondary">Detalles</a>
+                <a th:href="@{/docentes/edit/{id}(id=${item.id})}" class="btn btn-outline-info">Editar</a>
+                <a th:href="@{/docentes/remove/{id}(id=${item.id})}" class="btn btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <div class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item" th:each="pagenumber : ${pageNumbers}">
+                    <a class="page-link" th:href="@{/docentes(page=${pagenumber})}" th:text="${pagenumber}"></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

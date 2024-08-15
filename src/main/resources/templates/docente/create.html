@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Crear Nuevo Docente</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-title {
+            color: #007bff;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.9;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content" class="container mt-5">
+    <div class="form-container">
+        <h1 class="form-title">Crear Nuevo Docente</h1>
+        <form th:action="@{/docentes/save}" th:object="${docente}" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nombre"><i class="fas fa-user"></i> Nombre</label>
+                        <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="Escriba el nombre del docente"/>
+                        <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="apellido"><i class="fas fa-user"></i> Apellido</label>
+                        <input type="text" class="form-control" th:field="*{apellido}" id="apellido" placeholder="Escriba el apellido del docente"/>
+                        <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="text-danger"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Escriba el email del docente" />
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
+                        <input type="text" class="form-control" th:field="*{telefono}" id="telefono" placeholder="Escriba el teléfono del docente" />
+                        <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="text-danger"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="escuela"><i class="fas fa-school"></i> Escuela</label>
+                        <input type="text" class="form-control" th:field="*{escuela}" id="escuela" placeholder="Escriba la escuela del docente"/>
+                        <div th:if="${#fields.hasErrors('escuela')}" th:errors="*{escuela}" class="text-danger"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                    <div class="btn-container">
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-save"></i> Guardar</button>
+                        <a th:href="@{/docentes}" class="btn btn-secondary btn-block"><i class="fas fa-arrow-left"></i> Regresar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
